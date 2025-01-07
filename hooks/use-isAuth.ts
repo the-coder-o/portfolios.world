@@ -8,9 +8,12 @@ export const useIsAuth = (): boolean => {
   try {
     const decoded: any = jwtDecode(token)
     const exp = decoded.exp * 1000
-    return Date.now() < exp
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const iat = decoded.iat * 1000
+    const sevenDaysInMs = 7 * 24 * 60 * 60 * 1000
+
+    return Date.now() < exp && Date.now() - iat <= sevenDaysInMs
   } catch (error: any | unknown) {
+    console.log(error)
     return false
   }
 }

@@ -1,4 +1,4 @@
-import { Bookmark, BriefcaseBusiness, Heart } from 'lucide-react'
+import { Book, Bookmark, BriefcaseBusiness, FileUser, FolderOpen, Heart } from 'lucide-react'
 
 export const tabData = [
   {
@@ -16,9 +16,27 @@ export const tabData = [
     icon: <Heart size={17} />,
     title: 'Liked Portfolios',
   },
-  // {
-  //   pageUrl: '/profile/about',
-  //   icon: <User size={17} />,
-  //   title: 'About Me',
-  // },
+]
+
+export const usersProfiletabData = [
+  {
+    pageUrl: '/profile/portfolios',
+    icon: <BriefcaseBusiness size={17} />,
+    title: 'Portfolios',
+  },
+  {
+    pageUrl: '/profile/projects',
+    icon: <FolderOpen size={17} />,
+    title: 'Projects',
+  },
+  {
+    pageUrl: '/profile/work',
+    icon: <Book size={17} />,
+    title: 'Work',
+  },
+  {
+    pageUrl: '/profile/resume',
+    icon: <FileUser size={17} />,
+    title: 'Resume',
+  },
 ]

@@ -4,7 +4,7 @@ import * as React from 'react'
 import { useEffect } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { AlertCircle, Briefcase, Crown, FileIcon as FileUser, FolderOpen, LifeBuoy, Send } from 'lucide-react'
+import { AlertCircle, Briefcase, Crown, FileIcon as FileUser, FolderOpen } from 'lucide-react'
 
 import { useGetUserPortfolio } from '@/modules/profile/hooks/useGetUserPortfolios'
 import { useGetProfileMe } from '@/modules/edit-profile/hooks/useGetProfileMe'
@@ -20,63 +20,51 @@ const data = {
   navMain: [
     {
       title: 'Portfolio',
-      url: 'all-portfolios',
+      url: '/dashboard/portfolios',
       icon: Briefcase,
       isActive: true,
       items: [
         {
           title: 'All portfolios',
-          url: 'all-portfolios',
+          url: '/all-portfolios',
         },
         {
           title: 'Create portfolio',
-          url: 'create-portfolio',
+          url: '/create-portfolio',
         },
       ],
     },
     {
       title: 'Project',
-      url: 'all-projects',
+      url: '/dashboard/projects',
       icon: FolderOpen,
       isActive: true,
       items: [
         {
           title: 'All projects',
-          url: 'all-projects',
+          url: '/all-projects',
         },
         {
           title: 'Add project',
-          url: 'add-projects',
+          url: '/add-project',
         },
       ],
     },
     {
       title: 'Resume',
-      url: '#',
+      url: '',
       icon: FileUser,
       isActive: true,
       items: [
         {
           title: 'All resume',
-          url: '#',
+          url: '',
         },
         {
           title: 'Create resume',
-          url: '#',
+          url: '',
         },
       ],
-    },
-  ],
-  navSecondary: [
-    {
-      title: 'Support with us',
-      url: '#',
-      icon: LifeBuoy,
-    },
-    {
-      title: 'Send feedback',
-      url: '#',
-      icon: Send,
     },
   ],
 }

@@ -31,7 +31,7 @@ export function NavMain({
   } | null
   userPortfolios: any[] | undefined
 }) {
-  const route = usePathname()
+  const pathname = usePathname()
   const isVipAccount = profile?.email === process.env.NEXT_PUBLIC_VIP_STATUS_EMAIL
   const portfolioCount = userPortfolios?.length || 0
 
@@ -42,6 +42,10 @@ export function NavMain({
       e.preventDefault()
       setIsDialogOpen(true)
     }
+  }
+
+  const isSubItemActive = (itemUrl: string, subItemUrl: string) => {
+    return pathname === `${itemUrl}${subItemUrl}`
   }
 
   return (
@@ -80,8 +84,8 @@ export function NavMain({
                     <SidebarMenuSub>
                       {item.items?.map((subItem) => (
                         <SidebarMenuSubItem key={subItem.title}>
-                          <SidebarMenuSubButton asChild className={cn(route.split('/')[3].toLowerCase() === subItem.url.toLowerCase() ? '!bg-sidebar-accent' : '')}>
-                            <Link href={subItem.url} prefetch={false} onClick={(e) => handleCreatePortfolioClick(e, subItem)}>
+                          <SidebarMenuSubButton asChild className={cn(isSubItemActive(item.url, subItem.url) ? '!bg-sidebar-accent' : '')}>
+                            <Link href={`${item.url}${subItem.url}`} prefetch={false} onClick={(e) => handleCreatePortfolioClick(e, subItem)}>
                               <span>{subItem.title}</span>
                             </Link>
                           </SidebarMenuSubButton>

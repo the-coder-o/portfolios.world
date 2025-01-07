@@ -57,11 +57,12 @@ export const AboutSection = () => {
                 </div>
               </Link>
             </div>
-            <div className="block rounded-xl bg-[#1A1A1A] px-2.5 py-4 text-center transition-colors hover:bg-[#252525]">
-              <div className="mb-1 flex items-center justify-center gap-2">
-                <span className="font-semibold text-white">🏆 Top product of the week</span>
-              </div>
+            <div className="flex h-auto items-center justify-center rounded-xl bg-[#1A1A1A] px-2.5 py-4 text-center transition-colors hover:bg-[#252525]">
+              <span className="font-semibold text-white">🏆 Top product of the week</span>
             </div>
+            <Link href="https://www.producthunt.com/posts/portfoliosworld?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-portfoliosworld" target="_blank" className={'!h-[70px] !w-full'}>
+              <img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=762334&theme=light" alt="PortfoliosWorld - Home | Product Hunt" className={'!h-[56px] !w-full'} />
+            </Link>
           </div>
         </div>
       </div>
