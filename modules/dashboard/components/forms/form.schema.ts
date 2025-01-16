@@ -13,11 +13,13 @@ export const portfolioSchema = z.object({
   category: z.string().min(1, { message: 'Category is required' }),
   description: z.string().min(10, { message: 'Description must be at least 10 characters' }).max(1000, { message: 'Description cannot exceed 1000 characters' }),
   images: z.array(z.union([z.instanceof(File), z.string().url()]).or(z.string())).min(1, { message: 'At least one image is required' }),
-  github_link: z.string().url({ message: 'GitHub link must be a valid URL' }).min(1, { message: 'GitHub link is required' }),
+  github_link: z.string().optional(),
   live_demo: z.string().url({ message: 'Live demo link must be a valid URL' }).min(1, { message: 'Live demo link is required' }),
   page: z.number().min(0, { message: 'Page number must be at least 1' }),
   skills: z.array(skillSchema).min(1).max(15),
+  video_url: z.string().optional(),
   type: z.string().min(1, { message: 'Type is required' }),
+  isPublic: z.boolean(),
 })
 
 export const editPortfolioSchema = z.object({
@@ -25,9 +27,11 @@ export const editPortfolioSchema = z.object({
   category: z.string(),
   description: z.string().min(10, { message: 'Description must be at least 10 characters' }).max(1000, { message: 'Description cannot exceed 1000 characters' }),
   images: z.array(z.union([z.instanceof(File), z.string().url()]).or(z.string())).min(1, { message: 'At least one image is required' }),
-  github_link: z.string().url({ message: 'GitHub link must be a valid URL' }).min(1, { message: 'GitHub link is required' }),
+  github_link: z.string().optional(),
   live_demo: z.string().url({ message: 'Live demo link must be a valid URL' }).min(1, { message: 'Live demo link is required' }),
   page: z.number().min(0, { message: 'Page number must be at least 1' }),
   skills: z.array(skillSchema).min(1).max(15),
+  video_url: z.string().optional(),
   type: z.string().min(1, { message: 'Type is required' }),
+  isPublic: z.boolean(),
 })

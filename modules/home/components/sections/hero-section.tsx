@@ -87,7 +87,7 @@ const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({ portfolios, isPen
         : portfolios
             .map((portfolio) => (
               <Link href={`/portfolios/${formatToSlug(portfolio.name)}`} key={portfolio._id} className="group relative h-[100px] w-[200px] overflow-hidden rounded-xl border border-neutral-700 bg-neutral-900 shadow-lg transition-transform">
-                <OptimizedImage src={`http://api.portfoliosworld.com${portfolio.images[0]}`} alt={portfolio.name} width={1000} height={1000} className="!h-auto !w-auto bg-cover opacity-75 transition duration-300 group-hover:scale-105" />
+                <OptimizedImage src={`https://api.portfoliosworld.com${portfolio.images[0]}`} alt={portfolio.name} width={1000} height={1000} className="!h-auto !w-auto bg-cover object-cover object-top opacity-75 transition duration-300 group-hover:scale-105" />
                 <div className="absolute -bottom-2 -left-2 right-0 bg-gradient-to-t from-black to-transparent p-4">
                   <h3 className="line-clamp-1 text-sm font-semibold text-white">{portfolio.name}</h3>
                   <p className="line-clamp-1 text-xs text-neutral-400">{portfolio.description}</p>

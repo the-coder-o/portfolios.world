@@ -6,7 +6,9 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useCreatePortfolio } from '@/modules/dashboard/hooks/useCreatePortfolio'
 import { portfolioSchema } from '@/modules/dashboard/components/forms/form.schema'
 import { categories } from '@/constants/categories'
+import { Label } from '@/components/ui/label'
 import { Form } from '@/components/ui/form'
+import { Checkbox } from '@/components/ui/checkbox'
 import TextField from '@/components/fields/text-field'
 import TextAreaField from '@/components/fields/text-area'
 import SkillsField from '@/components/fields/skills-field'
@@ -28,12 +30,16 @@ export const CreatePortfolioForm = () => {
       live_demo: '',
       page: 0,
       skills: [],
+      video_url: '',
       type: 'free',
+      isPublic: true,
     },
   })
 
-  const { handleSubmit } = methods
+  const { handleSubmit, watch, setValue } = methods
   const { triggerPortfolioCreate, isPending } = useCreatePortfolio()
+
+  const isPublic = watch('isPublic')
 
   const onSubmit = (formValues: CreatePortfolioFormSchema) => {
     triggerPortfolioCreate(formValues)
@@ -54,13 +60,22 @@ export const CreatePortfolioForm = () => {
           <div className="space-y-2">
             <TextField type={'number'} name="page" label="Page number" required={true} placeholder="Page number" className="rounded-xl" />
           </div>
+          <div className="space-y-2">
+            <TextField name="video_url" label="Video url (YouTube, Loom or Vimeo only)" required={false} placeholder="https://" className="rounded-xl" />
+          </div>
+          <div className="flex items-center space-x-2">
+            <Label htmlFor="isPublic">Is this portfolio open source?</Label>
+            <Checkbox id="isPublic" checked={isPublic} onCheckedChange={(checked: any) => setValue('isPublic', checked)} />
+          </div>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <div className="space-y-2">
-              <TextField name={'github_link'} label={'Github link'} required={true} placeholder="https://github.com/username/repo" />
-            </div>
             <div className="space-y-2">
               <TextField name={'live_demo'} label={'Live Demo'} required={true} placeholder="https://your-demo-site.com" />
             </div>
+            {isPublic && (
+              <div className="space-y-2">
+                <TextField name={'github_link'} label={'Github link'} required={!!isPublic} placeholder="https://github.com/username/repo" />
+              </div>
+            )}
           </div>
           <div className="space-y-2">
             <SkillsField name="skills" label="Skills & Technologies" required={true} />

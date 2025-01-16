@@ -36,7 +36,7 @@ export default function SelectCategoryField({ data, placeholder, name, label, re
               </SelectTrigger>
               <SelectContent className="rounded-xl">
                 {data.map((item) => (
-                  <SelectItem value={item.type} key={item.type} disabled={item.disabled}>
+                  <SelectItem value={item.type} key={item.type} disabled={item.disabled} className={'rounded-xl'}>
                     {item.name}
                   </SelectItem>
                 ))}
