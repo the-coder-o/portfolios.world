@@ -5,6 +5,7 @@ import Link from 'next/link'
 
 import { useGetUsersPortfolios } from '@/modules/portfolios/hooks/useGetUsersPortfolios'
 import { PortfolioList } from '@/modules/dashboard/types/portfolios-list'
+import { formatToSlug } from '@/lib/format-to-slug'
 import { useIsAuth } from '@/hooks/use-isAuth'
 import WordRotate from '@/components/ui/word-rotate'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -20,7 +21,7 @@ export const HeroSection = () => {
   return (
     <section className="mt-[150px] flex justify-between gap-16 lg:flex-row">
       <div className="max-w-[650px] lg:text-left">
-        <h1 className="text-5xl font-bold text-white md:text-7xl lg:text-[90px]">
+        <h1 className="text-5xl font-[800] text-white md:text-7xl lg:text-[90px]">
           <span className="bg-gradient-to-r from-[#a855f7] to-[#6366f1] bg-clip-text text-transparent">Make your portfolios look</span>
           <span className="flex gap-3 lg:justify-start">
             10x
@@ -54,8 +55,8 @@ export const HeroSection = () => {
             <p className="mt-1 text-neutral-400">Portfolios</p>
           </div>
           <div>
-            <h2 className="text-3xl font-bold text-white">50+</h2>
-            <p className="mt-1 text-neutral-400">Satisfied Creators</p>
+            <h2 className="text-3xl font-bold text-white">200+</h2>
+            <p className="mt-1 text-neutral-400">Creators</p>
           </div>
           <div>
             <h2 className="text-3xl font-bold text-white">100+</h2>
@@ -80,18 +81,21 @@ const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({ portfolios, isPen
   return (
     <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
       {isPending
-        ? Array(3)
+        ? Array(6)
             .fill(0)
-            .map((_, index) => <Skeleton key={index} className={'h-[200px] w-[200px] rounded-xl'} />)
-        : portfolios.slice(0, 3).map((portfolio) => (
-            <div key={portfolio._id} className="group relative h-[200px] w-[200px] overflow-hidden rounded-xl border border-neutral-700 bg-neutral-900 shadow-lg transition-transform">
-              <OptimizedImage src={`http://api.portfoliosworld.com${portfolio.images[0]}`} alt={portfolio.name} width={1000} height={1000} className="!h-full !w-full bg-cover object-cover opacity-75 transition duration-300 group-hover:scale-105" />
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
-                <h3 className="line-clamp-1 text-lg font-semibold text-white">{portfolio.name}</h3>
-                <p className="line-clamp-1 text-sm text-neutral-400">{portfolio.description}</p>
-              </div>
-            </div>
-          ))}
+            .map((_, index) => <Skeleton key={index} className={'h-[100px] w-[200px] rounded-xl'} />)
+        : portfolios
+            .map((portfolio) => (
+              <Link href={`/portfolios/${formatToSlug(portfolio.name)}`} key={portfolio._id} className="group relative h-[100px] w-[200px] overflow-hidden rounded-xl border border-neutral-700 bg-neutral-900 shadow-lg transition-transform">
+                <OptimizedImage src={`https://api.portfoliosworld.com${portfolio.images[0]}`} alt={portfolio.name} width={1000} height={1000} className="!h-auto !w-auto bg-cover object-cover object-top opacity-75 transition duration-300 group-hover:scale-105" />
+                <div className="absolute -bottom-2 -left-2 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                  <h3 className="line-clamp-1 text-sm font-semibold text-white">{portfolio.name}</h3>
+                  <p className="line-clamp-1 text-xs text-neutral-400">{portfolio.description}</p>
+                </div>
+              </Link>
+            ))
+            .reverse()
+            .slice(0, 6)}
     </div>
   )
 }

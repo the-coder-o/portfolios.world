@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import Autoplay from 'embla-carousel-autoplay'
 
-import { Skill } from '@/modules/dashboard/types/portfolios-list'
+import type { Skill } from '@/modules/dashboard/types/portfolios-list'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -28,7 +28,7 @@ export const HeroDetailSection = ({ portfolio }: any) => {
         )}
       </div>
       <div className="overflow-hidden rounded-xl">
-        {portfolio.images && portfolio.images.length > 0 ? (
+        {(portfolio.images && portfolio.images.length > 0) || portfolio.video_url ? (
           <Carousel
             opts={{
               loop: true,
@@ -41,17 +41,37 @@ export const HeroDetailSection = ({ portfolio }: any) => {
             className="w-full"
           >
             <CarouselContent>
-              {portfolio.images.map((image: string, index: number) => (
-                <CarouselItem key={index}>
+              {portfolio.video_url && (
+                <CarouselItem>
                   <div className="p-1">
                     <Card className="overflow-hidden rounded-xl">
                       <CardContent className="aspect-video p-0">
-                        <Image src={`https://api.portfoliosworld.com${image}`} width={2000} height={2000} alt={`${portfolio.name} image ${index + 1}`} className="h-full w-full object-cover object-top" />
+                        <iframe
+                          width="100%"
+                          height="100%"
+                          src={`https://www.youtube.com/embed/${getYouTubeVideoId(portfolio.video_url)}`}
+                          title="YouTube video player"
+                          frameBorder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                        ></iframe>
                       </CardContent>
                     </Card>
                   </div>
                 </CarouselItem>
-              ))}
+              )}
+              {portfolio.images &&
+                portfolio.images.map((image: string, index: number) => (
+                  <CarouselItem key={index}>
+                    <div className="p-1">
+                      <Card className="overflow-hidden rounded-xl">
+                        <CardContent className="aspect-video p-0">
+                          <Image src={`${process.env.NEXT_PUBLIC_BACK_URL_IMAGE}${image}`} width={2000} height={2000} alt={`${portfolio.name} image ${index + 1}`} className="h-full w-full object-cover object-top" />
+                        </CardContent>
+                      </Card>
+                    </div>
+                  </CarouselItem>
+                ))}
             </CarouselContent>
             <CarouselPrevious />
             <CarouselNext />
@@ -62,4 +82,10 @@ export const HeroDetailSection = ({ portfolio }: any) => {
       </div>
     </section>
   )
+}
+
+function getYouTubeVideoId(url: string): string {
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/
+  const match = url.match(regExp)
+  return match && match[2].length === 11 ? match[2] : ''
 }

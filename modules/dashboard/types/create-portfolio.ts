@@ -18,6 +18,8 @@ export interface CreatePortfolio {
   github_link: string
   live_demo: string
   page: number
+  video_url: string
+  isPublic: boolean
   type: string
   skills: Skill[]
 }

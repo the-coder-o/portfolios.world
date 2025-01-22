@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -13,6 +14,8 @@ interface AuthFooterProps {
 }
 
 export const AuthFooter = ({ pageTitle, pageDescription, pageUrl }: AuthFooterProps) => {
+  const router = useRouter()
+
   return (
     <>
       <div className="mt-10">
@@ -34,14 +37,14 @@ export const AuthFooter = ({ pageTitle, pageDescription, pageUrl }: AuthFooterPr
         </div>
         <div className="mt-6 flex w-full flex-col items-center justify-center gap-2">
           <Button
-            onClick={() => window.open('https://api.portfoliosworld.com/api/auth/google/callback')}
+            onClick={() => router.replace('https://api.portfoliosworld.com/api/auth/google/callback')}
             className="justify-centxl relative z-10 flex h-11 w-full items-center rounded-xl border-2 bg-white px-4 py-1.5 text-sm font-medium text-black transition duration-200 hover:bg-white/80 md:text-sm"
           >
             <Image src={'https://freelogopng.com/images/all_img/1657952440google-logo-png-transparent.png'} alt="google" width={15} height={15} />
             <span className="ml-2 text-sm font-semibold leading-6">Google</span>
           </Button>
           <Button
-            onClick={() => window.open('https://api.portfoliosworld.com/api/auth/github/callback')}
+            onClick={() => router.replace('https://api.portfoliosworld.com/api/auth/github/callback')}
             className="justify-centxl relative z-10 flex h-11 w-full items-center rounded-xl border-2 bg-white px-4 py-1.5 text-sm font-medium text-black transition duration-200 hover:bg-white/80 md:text-sm"
           >
             <Image src={'https://cdn-icons-png.flaticon.com/512/25/25231.png'} alt="google" width={15} height={15} />

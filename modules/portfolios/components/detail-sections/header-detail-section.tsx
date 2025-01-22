@@ -19,6 +19,7 @@ interface Portfolio {
   name: string
   github_link: string
   live_demo?: string
+  isPublic?: boolean
   user: {
     name: string
     avatar: string
@@ -64,6 +65,8 @@ export const HeaderDetailSection = ({ portfolio }: HeaderDetailSectionProps) => 
     }
   }, [isAuthed, isSaved, portfolio._id, triggerAddFavorite])
 
+  console.log(portfolio)
+
   return (
     <section className={'space-y-8'}>
       <BreadcrumbComponent items={[{ label: 'Home', href: '/' }, { label: 'Portfolios', href: '/portfolios' }, { label: portfolio.name }]} />
@@ -79,11 +82,13 @@ export const HeaderDetailSection = ({ portfolio }: HeaderDetailSectionProps) => 
           </div>
         </div>
         <div className="flex flex-wrap gap-2">
-          <Button asChild>
-            <Link href={portfolio.github_link} target="_blank" className="rounded-xl">
-              Clone the project
-            </Link>
-          </Button>
+          {portfolio.isPublic && (
+            <Button asChild>
+              <Link href={portfolio.github_link} target="_blank" className="rounded-xl">
+                Clone the project
+              </Link>
+            </Button>
+          )}
           {portfolio.live_demo && (
             <Button asChild variant="secondary">
               <Link href={portfolio.live_demo} className="rounded-xl">

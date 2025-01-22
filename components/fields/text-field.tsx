@@ -44,7 +44,7 @@ export default function TextField({ placeholder, required, name, label, classNam
                 type={type}
                 placeholder={placeholder}
                 className={cx('rounded-xl', IconLeft && 'pl-10', IconRight && 'pr-10', className)}
-                value={type === 'number' ? (field.value ? Number(field.value) : '') : field.value} // Ensure number input gets a number
+                value={type === 'number' ? (field.value ? Number(field.value) : '') : field.value}
                 onChange={(e) => {
                   const value = type === 'number' ? (e.target.value ? Number(e.target.value) : '') : e.target.value
                   field.onChange(value)
