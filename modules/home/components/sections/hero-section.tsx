@@ -55,8 +55,8 @@ export const HeroSection = () => {
             <p className="mt-1 text-neutral-400">Portfolios</p>
           </div>
           <div>
-            <h2 className="text-3xl font-bold text-white">50+</h2>
-            <p className="mt-1 text-neutral-400">Satisfied Creators</p>
+            <h2 className="text-3xl font-bold text-white">200+</h2>
+            <p className="mt-1 text-neutral-400">Creators</p>
           </div>
           <div>
             <h2 className="text-3xl font-bold text-white">100+</h2>

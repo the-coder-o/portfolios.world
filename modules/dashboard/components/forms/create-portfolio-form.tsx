@@ -65,17 +65,26 @@ export const CreatePortfolioForm = () => {
           </div>
           <div className="flex items-center space-x-2">
             <Label htmlFor="isPublic">Is this portfolio open source?</Label>
-            <Checkbox id="isPublic" checked={isPublic} onCheckedChange={(checked: any) => setValue('isPublic', checked)} />
+            <Checkbox
+              id="isPublic"
+              checked={isPublic}
+              onCheckedChange={(checked: boolean) => {
+                setValue('isPublic', checked)
+                if (!checked) {
+                  setValue('github_link', '')
+                }
+              }}
+            />
           </div>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             <div className="space-y-2">
               <TextField name={'live_demo'} label={'Live Demo'} required={true} placeholder="https://your-demo-site.com" />
             </div>
-            {isPublic && (
+            {isPublic === true ? (
               <div className="space-y-2">
                 <TextField name={'github_link'} label={'Github link'} required={!!isPublic} placeholder="https://github.com/username/repo" />
               </div>
-            )}
+            ) : null}
           </div>
           <div className="space-y-2">
             <SkillsField name="skills" label="Skills & Technologies" required={true} />

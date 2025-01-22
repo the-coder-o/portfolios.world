@@ -24,7 +24,7 @@ export const getPortfolios = (items: PortfolioList[] = []) => {
     page: Math.max(item?.page ?? 0, 0),
     github_link: item?.github_link ?? '',
     live_demo: item?.live_demo ?? '',
-    is_public: item?.is_public ?? false,
+    isPublic: item?.isPublic ?? false,
     video_url: item?.video_url ?? '',
     type: item?.type ?? '',
     skills: Array.isArray(item?.skills)

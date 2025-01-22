@@ -19,7 +19,7 @@ export interface CreatePortfolio {
   live_demo: string
   page: number
   video_url: string
-  is_public: boolean
+  isPublic: boolean
   type: string
   skills: Skill[]
 }

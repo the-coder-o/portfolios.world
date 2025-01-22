@@ -6,7 +6,9 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useUpdatePortfolio } from '@/modules/dashboard/hooks/useUpdatePortfolio'
 import { editPortfolioSchema } from '@/modules/dashboard/components/forms/form.schema'
 import { categories } from '@/constants/categories'
+import { Label } from '@/components/ui/label'
 import { Form } from '@/components/ui/form'
+import { Checkbox } from '@/components/ui/checkbox'
 import TextField from '@/components/fields/text-field'
 import TextAreaField from '@/components/fields/text-area'
 import SkillsField from '@/components/fields/skills-field'
@@ -32,6 +34,8 @@ export const UpdatePortfolioForm = ({ portfolio }: UpdatePortfolio) => {
       live_demo: portfolio?.live_demo ?? '',
       page: portfolio?.page ?? 0,
       skills: portfolio?.skills ?? [],
+      video_url: portfolio?.video_url ?? '',
+      isPublic: portfolio?.isPublic ?? true,
       type: portfolio?.type ?? 'free',
     },
   })
@@ -41,7 +45,11 @@ export const UpdatePortfolioForm = ({ portfolio }: UpdatePortfolio) => {
     handleSubmit,
     formState: { isDirty },
     reset,
+    watch,
+    setValue,
   } = methods
+
+  const isPublic = watch('isPublic')
 
   const onSubmit = (formValues: UpdatePortfolioFormSchema | any) => {
     triggerUpdatePortfolio(formValues)
@@ -53,34 +61,49 @@ export const UpdatePortfolioForm = ({ portfolio }: UpdatePortfolio) => {
     }
   }, [isSuccess, reset, methods])
 
+  useEffect(() => {
+    if (!isPublic) {
+      setValue('github_link', '')
+    }
+  }, [isPublic, setValue])
+
   return (
     <div className={'mb-5'}>
       <Form {...methods}>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div className="grid grid-cols-1">
             <div className="space-y-2">
-              <TextField name="name" label="Portfolio name" placeholder="Portfolio name" className="rounded-xl" />
+              <TextField name="name" label="Portfolio name" required={true} placeholder="Portfolio name" className="rounded-xl" />
             </div>
           </div>
           <div className="space-y-2">
-            <SelectCategoryField name="category" label="Select category" placeholder="Select category" data={categories} />
+            <SelectCategoryField name="category" label="Select category" required={true} placeholder="Select category" data={categories} />
           </div>
           <div className="space-y-2">
-            <TextField type={'number'} name="page" label="Page number" placeholder="Page number" className="rounded-xl" />
+            <TextField type={'number'} name="page" label="Page number" required={true} placeholder="Page number" className="rounded-xl" />
+          </div>
+          <div className="space-y-2">
+            <TextField name="video_url" label="Video url (YouTube, Loom or Vimeo only)" required={false} placeholder="https://" className="rounded-xl" />
+          </div>
+          <div className="flex items-center space-x-2">
+            <Label htmlFor="isPublic">Is this portfolio open source?</Label>
+            <Checkbox id="isPublic" checked={isPublic} onCheckedChange={(checked: boolean) => setValue('isPublic', checked)} />
           </div>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             <div className="space-y-2">
-              <TextField name={'github_link'} label={'Github link'} placeholder="https://github.com/username/repo" />
+              <TextField name={'live_demo'} label={'Live Demo'} required={true} placeholder="https://your-demo-site.com" />
             </div>
-            <div className="space-y-2">
-              <TextField name={'live_demo'} label={'Live Demo'} placeholder="https://your-demo-site.com" />
-            </div>
+            {isPublic && (
+              <div className="space-y-2">
+                <TextField name={'github_link'} label={'Github link'} required={true} placeholder="https://github.com/username/repo" />
+              </div>
+            )}
           </div>
           <div className="space-y-2">
-            <SkillsField name="skills" label="Skills & Technologies" />
+            <SkillsField name="skills" label="Skills & Technologies" required={true} />
           </div>
           <div className="space-y-2">
-            <TextAreaField name={'description'} label={'Description'} placeholder="Describe your portfolio" className="min-h-[100px]" />
+            <TextAreaField name={'description'} label={'Description'} required={true} placeholder="Describe your portfolio" className="min-h-[100px]" />
           </div>
           <div className="space-y-2">
             <FileField name="images" label="Portfolios" maxFiles={5} />

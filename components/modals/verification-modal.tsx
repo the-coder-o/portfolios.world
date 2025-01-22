@@ -13,14 +13,14 @@ interface VerificationDialogProps {
   children: React.ReactNode
 }
 
-export const VerificationDialog = ({ name, img, children }: VerificationDialogProps) => {
+export const VerificationModal = ({ name, img, children }: VerificationDialogProps) => {
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="!rounded-xl sm:max-w-md">
         <DialogHeader className="flex flex-col items-center space-y-4">
           <div className="relative">
-            <Image src={img} width={80} height={80} alt={name} className="rounded-xl" />
+            <Image src={img} width={80} height={80} alt={name} className="rounded-2xl" />
             <Image src={'https://telegram.org/file/464001906/107ca/Y-sn47RDLAk.1898/a6ad0e5cfb2699cf01'} width={20} height={20} alt={'tick'} className="absolute -bottom-1 -right-2 h-6 w-6" />
           </div>
           <DialogTitle className="text-xl font-bold">{name}</DialogTitle>

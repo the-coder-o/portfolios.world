@@ -17,7 +17,7 @@ export interface PortfolioList {
   github_link: string
   live_demo: string
   video_url: string
-  is_public: boolean
+  isPublic: boolean
   type: string
   skills: Skill[]
 }

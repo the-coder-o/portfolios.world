@@ -2,7 +2,7 @@ import { Input } from '@/components/ui/input'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 
 export const UserGridSection = () => {
-  const avatars = Array.from({ length: 88 }, (_, i) => ({
+  const avatars = Array.from({ length: 198 }, (_, i) => ({
     id: i,
     letter: String.fromCharCode(65 + (i % 26)),
     color: `hsl(${Math.random() * 360}, 70%, 50%)`,
@@ -43,7 +43,7 @@ export const UserGridSection = () => {
                 </Avatar>
               ))}
             </div>
-            <p className="mt-5 text-gray-400">92,090+ peers and counting...</p>
+            <p className="mt-5 text-gray-400">200+ creators and counting...</p>
           </div>
         </div>
       </div>
