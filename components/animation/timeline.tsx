@@ -24,7 +24,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //@ts-ignore
     target: containerRef,
-    offset: ['start 10%', 'end 50%'],
+    offset: ['start 10%', 'end 10%'],
   })
 
   const heightTransform = useTransform(scrollYProgress, [0, 1], [0, height])

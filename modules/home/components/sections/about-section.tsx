@@ -4,7 +4,7 @@ import { Star } from 'lucide-react'
 
 export const AboutSection = () => {
   return (
-    <div className="mb-[200px]">
+    <div className="my-[200px]">
       <div className="container flex items-center justify-between">
         <div className="space-y-8">
           <div className={'flex w-[650px] flex-col gap-4'}>

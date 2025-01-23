@@ -4,9 +4,11 @@ import React from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Clock, Sparkle } from 'lucide-react'
+import { Clock, Send, Sparkle } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
 import { Logo } from '@/components/logo/logo'
 
 export const Footer = () => {
@@ -24,6 +26,16 @@ export const Footer = () => {
           <div className="flex flex-col items-start gap-4">
             <Logo />
             <p className="w-[500px] text-muted-foreground max-md:w-full">Explore the finest portfolios and showcase your work with brilliance! Whether you&apos;re a designer, developer, or creative professional, let your projects shine and make a lasting impression.</p>
+            <div className="mt-1 w-full max-w-md">
+              <h4 className="mb-2 text-sm font-semibold text-white">Subscribe to our newsletter</h4>
+              <div className="flex gap-2">
+                <Input type="email" placeholder="Enter your email" className="rounded-xl border border-white bg-transparent" />
+                <Button variant="default" size="default" className={'rounded-xl'}>
+                  <Send className="mr-2 h-4 w-4" />
+                  Subscribe
+                </Button>
+              </div>
+            </div>
           </div>
           <div className="flex justify-between gap-20 max-md:flex-col max-md:gap-10">
             <div className="space-y-2">
@@ -118,7 +130,7 @@ export const Footer = () => {
               <Image src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/1000px-Instagram_logo_2022.svg.png" alt="Peerlist.io" width="20" height="20" className={'!h-4 !w-4 rounded-sm'} />
             </Link>
           </div>
-          <div className="mt-12 text-sm text-muted-foreground max-md:mt-3">&copy; 2025 PortfoliosWorld. All rights reserved.</div>
+          <div className="mt-12 text-sm text-muted-foreground max-md:mt-3">&copy; 2024-2025 PortfoliosWorld. All rights reserved.</div>
           <div className="mt-12 text-sm text-muted-foreground max-md:mt-3">
             Created by:{' '}
             <Link href={'https://www.a-bd.me'} target="_blank" className="font-bold text-white">

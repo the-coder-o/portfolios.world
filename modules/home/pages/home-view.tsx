@@ -22,9 +22,9 @@ export const HomeView = () => {
         </div>
       </div>
       <ShowcaseSection />
-      <UserGridSection />
-      <MarqueeDemo />
       <AboutSection />
+      <MarqueeDemo />
+      <UserGridSection />
     </div>
   )
 }
