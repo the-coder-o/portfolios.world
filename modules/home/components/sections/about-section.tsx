@@ -5,9 +5,9 @@ import { Star } from 'lucide-react'
 export const AboutSection = () => {
   return (
     <div className="my-[200px]">
-      <div className="container flex items-center justify-between">
+      <div className="container flex items-center justify-between max-lg:flex-col max-lg:items-start max-lg:gap-10">
         <div className="space-y-8">
-          <div className={'flex w-[650px] flex-col gap-4'}>
+          <div className={'flex w-[650px] flex-col gap-4 max-lg:w-full'}>
             <h1 className="text-5xl font-bold text-foreground max-sm:text-3xl">
               The world&apos;s best developer platform for <span className="bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">knowledge</span>
             </h1>
@@ -30,7 +30,7 @@ export const AboutSection = () => {
             </div>
           </div>
         </div>
-        <div className="w-[550px] space-y-6">
+        <div className="w-[550px] space-y-6 max-lg:w-full">
           <div className="space-y-2 text-center">
             <div className="flex justify-center gap-1">
               {[...Array(5)].map((_, i) => (

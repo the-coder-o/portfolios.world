@@ -12,7 +12,7 @@ export const UserGridSection = () => {
     <div className={'container'}>
       <div className="mb-[200px] mt-[200px]">
         <div className={'flex flex-col'}>
-          <div className={'mb-10 flex items-center justify-between'}>
+          <div className={'mb-10 flex items-center justify-between max-md:flex-col max-md:items-start max-md:gap-5'}>
             <div className={'flex flex-col gap-1'}>
               <h2 className="text-5xl font-bold tracking-tighter text-foreground max-sm:mb-1 max-sm:text-3xl">Join to PortfoliosWorld!</h2>
               <h3 className="text-balance text-lg font-medium tracking-tight text-foreground/80">Showcase your work, launch side projects, find jobs, and connect with the most (in)credible people.</h3>

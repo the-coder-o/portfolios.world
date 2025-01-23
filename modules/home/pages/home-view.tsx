@@ -1,6 +1,5 @@
 import { UserGridSection } from '@/modules/home/components/sections/user-grid-section'
 import { TemplatesSection } from '@/modules/home/components/sections/template-section'
-import { ShowcaseSection } from '@/modules/home/components/sections/showcase-section'
 import { MarqueeDemo } from '@/modules/home/components/sections/reviewcard-section'
 import { AboutSection } from '@/modules/home/components/sections/about-section'
 import { LogoCarousel } from '@/components/logo/logo-slider'
@@ -14,17 +13,18 @@ export const HomeView = () => {
       <div className="container">
         <HeroSection />
       </div>
-      <div className="pt-[80px] max-md:pt-10">
+      <div className="pt-[80px] max-md:pb-10 max-md:pt-10">
         <div className="container">
           <LogoCarousel />
           <PortfolioSection />
           <TemplatesSection />
         </div>
       </div>
-      <ShowcaseSection />
-      <AboutSection />
-      <MarqueeDemo />
-      <UserGridSection />
+      <div className={'max-md:hidden'}>
+        <AboutSection />
+        <MarqueeDemo />
+        <UserGridSection />
+      </div>
     </div>
   )
 }

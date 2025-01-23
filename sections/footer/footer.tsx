@@ -29,7 +29,7 @@ export const Footer = () => {
             <div className="mt-1 w-full max-w-md">
               <h4 className="mb-2 text-sm font-semibold text-white">Subscribe to our newsletter</h4>
               <div className="flex gap-2">
-                <Input type="email" placeholder="Enter your email" className="rounded-xl border border-white bg-transparent" />
+                <Input type="email" placeholder="Enter your email" className="rounded-xl bg-background" />
                 <Button variant="default" size="default" className={'rounded-xl'}>
                   <Send className="mr-2 h-4 w-4" />
                   Subscribe
