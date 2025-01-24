@@ -9,6 +9,7 @@ import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClient } from '@/services/react-query/query-client'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import { AboutMeModal } from '@/components/modals/aboutme-modal'
 
 function CookieConsent() {
   const [isVisible, setIsVisible] = useState(false)
@@ -48,9 +49,29 @@ function CookieConsent() {
 }
 
 export function ClientProviders({ children }: { children: React.ReactNode }) {
+  const [isAboutMeModalOpen, setIsAboutMeModalOpen] = useState(false)
+
+  useEffect(() => {
+    const hasSeenModal = localStorage.getItem('hasSeenAboutMeModal')
+
+    if (!hasSeenModal) {
+      const timer = setTimeout(() => {
+        setIsAboutMeModalOpen(true)
+        localStorage.setItem('hasSeenAboutMeModal', 'true')
+      }, 5000)
+
+      return () => clearTimeout(timer)
+    }
+  }, [])
+
+  const closeAboutMeModal = () => {
+    setIsAboutMeModalOpen(false)
+  }
+
   return (
     <QueryClientProvider client={queryClient}>
       <Toaster position="top-center" />
+      <AboutMeModal isOpen={isAboutMeModalOpen} onClose={closeAboutMeModal} />
       {children}
       <CookieConsent />
       <Analytics />
