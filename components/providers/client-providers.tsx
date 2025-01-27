@@ -2,6 +2,7 @@
 
 import { Toaster } from 'sonner'
 import React, { useEffect, useState } from 'react'
+import Script from 'next/script'
 import { Cookie, X } from 'lucide-react'
 import { Analytics } from '@vercel/analytics/react'
 import { QueryClientProvider } from '@tanstack/react-query'
@@ -46,6 +47,23 @@ function CookieConsent() {
       </div>
     </Card>
   )
+}
+
+export function BuyMeACoffeeWidget() {
+  useEffect(() => {
+    const script = document.querySelector('script[data-name="BMC-Widget"]') as HTMLScriptElement
+    if (script) {
+      script.setAttribute('data-id', 'abdulbacit')
+      script.setAttribute('data-description', 'Support me on Buy me a coffee!')
+      script.setAttribute('data-message', '')
+      script.setAttribute('data-color', '#BD5FFF')
+      script.setAttribute('data-position', 'Right')
+      script.setAttribute('data-x_margin', '18')
+      script.setAttribute('data-y_margin', '18')
+    }
+  }, [])
+
+  return <Script strategy="lazyOnload" data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" />
 }
 
 export function ClientProviders({ children }: { children: React.ReactNode }) {

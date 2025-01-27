@@ -1,19 +1,40 @@
+'use client'
+
+import { useEffect, useState } from 'react'
+
+import { useGetAllUsers } from '@/modules/home/hooks/useGetAllUsers'
 import { Input } from '@/components/ui/input'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
+import OptimizedImage from '@/components/optimize-image'
 
 export const UserGridSection = () => {
-  const avatars = Array.from({ length: 132 }, (_, i) => ({
-    id: i,
-    letter: String.fromCharCode(65 + (i % 26)),
-    color: `hsl(${Math.random() * 360}, 70%, 50%)`,
-  }))
+  const { data: apiUsers } = useGetAllUsers()
+  const [allUsers, setAllUsers] = useState<any[]>([])
+
+  useEffect(() => {
+    const createMockAvatars = (count: number) => {
+      return Array.from({ length: count }, (_, i) => ({
+        _id: `mock-${i}`,
+        name: `User ${i + 1}`,
+        avatar: '',
+        letter: String.fromCharCode(65 + (i % 26)),
+        color: `hsl(${Math.random() * 360}, 70%, 50%)`,
+      }))
+    }
+
+    const totalUsers = apiUsers ? apiUsers.length : 0
+    const mockAvatarsCount = Math.max(132 - totalUsers, 0)
+    const mockAvatars = createMockAvatars(mockAvatarsCount)
+
+    setAllUsers([...(apiUsers || []), ...mockAvatars])
+  }, [apiUsers])
 
   return (
-    <div className={'container'}>
+    <div className="container">
       <div className="mb-[200px] mt-[200px]">
-        <div className={'flex flex-col'}>
-          <div className={'mb-10 flex items-center justify-between max-md:flex-col max-md:items-start max-md:gap-5'}>
-            <div className={'flex flex-col gap-1'}>
+        <div className="flex flex-col">
+          <div className="mb-10 flex items-center justify-between max-md:flex-col max-md:items-start max-md:gap-5">
+            <div className="flex flex-col gap-1">
               <h2 className="text-5xl font-bold tracking-tighter text-foreground max-sm:mb-1 max-sm:text-3xl">Join to PortfoliosWorld!</h2>
               <h3 className="text-balance text-lg font-medium tracking-tight text-foreground/80">Showcase your work, launch side projects, find jobs, and connect with the most (in)credible people.</h3>
             </div>
@@ -34,16 +55,20 @@ export const UserGridSection = () => {
             </div>
           </div>
           <div>
-            <div className="flex flex-wrap justify-between gap-3">
-              {avatars.map((avatar) => (
-                <Avatar key={avatar.id} className="h-12 w-12 cursor-pointer rounded-xl transition-all hover:scale-125">
-                  <AvatarFallback style={{ backgroundColor: avatar.color }} className={'rounded-xl'}>
-                    {avatar.letter}
-                  </AvatarFallback>
+            <div className="flex flex-wrap justify-start gap-3">
+              {allUsers.map((user) => (
+                <Avatar key={user._id} className="h-12 w-12 cursor-pointer rounded-xl transition-all hover:scale-125">
+                  {user.avatar ? (
+                    <OptimizedImage src={user.avatar} alt={user.name} width={20} height={20} className="!h-12 !w-12 rounded-xl" />
+                  ) : (
+                    <AvatarFallback className="rounded-xl" style={{ backgroundColor: user.color }}>
+                      {user.letter}
+                    </AvatarFallback>
+                  )}
                 </Avatar>
               ))}
             </div>
-            <p className="mt-5 text-gray-400">200+ creators and counting...</p>
+            <p className="mt-5 text-gray-400">{allUsers.length}+ creators and counting...</p>
           </div>
         </div>
       </div>
